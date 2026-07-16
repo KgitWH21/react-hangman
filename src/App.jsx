@@ -39,7 +39,10 @@ function App() {
 
 
   return (
-    <div>App</div>
+    <main className="game">
+      <h1>Hangman</h1>
+
+    </main>
   )
 }
 
