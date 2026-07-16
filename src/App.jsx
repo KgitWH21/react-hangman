@@ -9,8 +9,33 @@ function getRandomWord() {
 } 
 
 function App() {
-  const [puzzle, setPuzzle] = useState("");
-  const [guessedLetters, setGuess] = useState([]);
+  const [puzzle] = useState(getRandomWord);
+  const [guessedLetters, setGuessedLetters] = useState([]);
+
+  const incorrectLetters = guessedLetters.filter((letter) => !puzzle.includes(letter),)
+
+  // turn puzzle into array then use .every to confirm they're all there
+  const puzzleIsSolved = puzzle.split('').every((letter) => guessedLetters.includes(letter))
+
+  const gameIsOver = incorrectLetters.length > 6;
+
+  function handleGuess(letter) {
+    if (guessedLetters.includes(letter)) {
+      alert(`You already guessed ${letter}.`)
+      return
+    }
+  }
+
+  const updatedGuesses = [...guessedLetters, letter]
+  setGuessedLetters(guessedLetters)
+
+  const updatedIncorrectLetters = updatedGuesses.filter(
+    (guess) => !puzzle.includes(guess),
+  )
+
+  if (updatedIncorrectLetters.length > 6) {
+     alert(`Game over! The word was "${puzzle}".`)
+  }
 
 
   return (
